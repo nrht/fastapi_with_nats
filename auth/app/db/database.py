@@ -8,8 +8,9 @@ from sqlalchemy.orm import sessionmaker
 path = os.path.join(os.path.dirname(__file__), '..', 'config', 'config.ini')
 config_ini = configparser.ConfigParser()
 config_ini.read(path)
+# POSTGRES_SERVER = config_ini['POSTGRES']['POSTGRES_SERVER']
 POSTGRES_DB = config_ini['POSTGRES']['POSTGRES_DB']
-POSTGRES_SERVER = config_ini['POSTGRES']['POSTGRES_SERVER']
+POSTGRES_SERVER = os.getenv('POSTGRES_SERVER')
 POSTGRES_PORT = config_ini['POSTGRES']['POSTGRES_PORT']
 POSTGRES_USER = config_ini['POSTGRES']['POSTGRES_USER']
 POSTGRES_PASSWORD = config_ini['POSTGRES']['POSTGRES_PASSWORD']

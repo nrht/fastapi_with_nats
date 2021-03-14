@@ -6,11 +6,12 @@ from db import database, models
 from auth_module import hashing, token_2
 
 router = APIRouter(
-    tags=['authentication']
+    tags=['authentication'],
+    prefix='/api/login'
 )
 
 
-@router.post('/login')
+@router.post('/')
 def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(database.get_db)):
     user = db.query(models.User).filter(
         models.User.email == request.username).first()
@@ -18,7 +19,7 @@ def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f'Invalid Credentials')
 
-    if not Hash.verify(user.password, request.password):
+    if not hashing.Hash.verify(user.password, request.password):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f'Incorrect password')
 
