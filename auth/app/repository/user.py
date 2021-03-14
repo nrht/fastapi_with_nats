@@ -1,11 +1,13 @@
 from sqlalchemy.orm import Session
-import models, schemas
+from db import models
+from schema import schemas
 from fastapi import HTTPException, status
-import hashing
+from auth_module import hashing
 
-def create(request: schemas.User, db: Session):
+
+def create(request: schemas.UserCreate, db: Session):
     new_user = models.User(
-        name=request.name, email=request.email, password=hashing.Hash.bcrypt(request.password))
+        name=request.name, email=request.email, role_id=request.role_id, password=hashing.Hash.bcrypt(request.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)

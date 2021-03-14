@@ -1,10 +1,13 @@
 from sqlalchemy.orm import Session
-import models, schemas
+import models
+import schemas
 from fastapi import HTTPException, status
+
 
 def get_all(db: Session):
     blogs = db.query(models.Blog).all()
     return blogs
+
 
 def create(request: schemas.Blog, db: Session):
     new_blog = models.Blog(title=request.title, body=request.body, user_id=1)
@@ -12,6 +15,7 @@ def create(request: schemas.Blog, db: Session):
     db.commit()
     db.refresh(new_blog)
     return new_blog
+
 
 def destroy(id: int, db: Session):
     blog = db.query(models.Blog).filter(models.Blog.id == id)
@@ -22,6 +26,7 @@ def destroy(id: int, db: Session):
     db.commit()
     return 'done'
 
+
 def update(id: int, request: schemas.Blog, db: Session):
     blog = db.query(models.Blog).filter(models.Blog.id == id)
     if not blog.first():
@@ -30,6 +35,7 @@ def update(id: int, request: schemas.Blog, db: Session):
     blog.update(request)
     db.commit()
     return 'updated'
+
 
 def show(id: int, db: Session):
     blog: models.Blog = db.query(models.Blog).filter(
