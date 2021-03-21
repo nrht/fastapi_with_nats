@@ -7,7 +7,7 @@ from auth_module import hashing, email_validating
 from auth_module.exceptions import ValidatingError
 
 
-def create(request: schemas.UserCreate, db: Session) -> models.User:
+def create(request: schemas.UserCreate, db: Session):
 
     new_user: models.User = models.User(
         name=request.name, email=request.email, role_id=request.role_id, password=hashing.Hash.bcrypt(request.password))
@@ -40,3 +40,6 @@ def show(id: int, db: Session):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f'User with the id {id} is not available')
     return user
+
+def get_all(db: Session):
+    return db.query(models.User).all()
