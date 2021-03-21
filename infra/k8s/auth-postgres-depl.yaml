@@ -1,3 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: init-db-sql
+data:
+  init_table.sql: |
+    CREATE TABLE IF NOT EXISTS roles (id SERIAL NOT NULL,role VARCHAR,PRIMARY KEY (id),UNIQUE (role));
+    CREATE TABLE IF NOT EXISTS users (id SERIAL NOT NULL,email VARCHAR,name VARCHAR,password VARCHAR,registered_at TIMESTAMP WITHOUT TIME ZONE,role_id INTEGER,PRIMARY KEY (id),FOREIGN KEY(role_id) REFERENCES roles (id));
+    INSERT INTO roles (id, role) VALUES (DEFAULT, 'administrator');
+    INSERT INTO roles (id, role) VALUES (DEFAULT, 'director');
+    INSERT INTO roles (id, role) VALUES (DEFAULT, 'manager');
+    INSERT INTO roles (id, role) VALUES (DEFAULT, 'member');
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -13,22 +26,22 @@ spec:
         app: auth-postgres
     spec:
       containers:
-        - name: auth-postgres
-          image: postgres:12.1-alpine
-          volumeMounts:
-          - name: init
-            mountPath: /docker-entrypoint-initdb.d/init.sql
-          env:
-            - name: POSTGRES_DB
-              value: postgres
-            - name: POSTGRES_USER
-              value: postgres
-            - name: POSTGRES_PASSWORD
-              value: postgres
+      - name: auth-postgres
+        image: postgres:12.1-alpine
+        env:
+        - name: POSTGRES_DATABASE
+          value: postgres
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: postgres
+        volumeMounts:
+        - name: init-sql-configmap
+          mountPath: /docker-entrypoint-initdb.d
       volumes:
-        - name: init
+        - name: init-sql-configmap
           configMap:
-            name: init.sql
+            name: init-db-sql
 ---
 apiVersion: v1
 kind: Service
@@ -38,7 +51,7 @@ spec:
   selector:
     app: auth-postgres
   ports:
-    - name: postgres
+    - name: auth-postgres
       protocol: TCP
       port: 5432
       targetPort: 5432
