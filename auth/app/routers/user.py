@@ -9,7 +9,7 @@ from auth_module import oauth2
 
 router = APIRouter(
     tags=['users'],
-    prefix='/api/user'
+    prefix='/user'
 
 )
 get_db = database.get_db
@@ -25,7 +25,7 @@ def all(db: Session = Depends(get_db)):
     return user.get_all(db)
 
 @router.get('/{id}', response_model=schemas.User)
-def get_user(id: int, db: Session = Depends(get_db)):
-# def get_user(id: int, db: Session = Depends(get_db), get_current_user: schemas.User = Depends(oauth2.get_current_user)):
+# def get_user(id: int, db: Session = Depends(get_db)):
+def get_user(id: int, db: Session = Depends(get_db), get_current_user: schemas.User = Depends(oauth2.get_current_user)):
     return user.show(id, db)
 

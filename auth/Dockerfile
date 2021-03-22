@@ -11,4 +11,7 @@ EXPOSE 8000
 
 WORKDIR /usr/src/app
 # CMD ["uvicorn", "main:app"]
-CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+# CMD ["uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000", "--root-path", $ROOT_PATH]
+CMD uvicorn main:app --reload --port 8000 --root-path $ROOT_PATH
+# CMD ["bash", "-c", "uvicorn main:app --reload --host 0.0.0.0 --port 8000 --root-path $ROOT_PATH"]
+#  "django-admin startproject $PROJECTNAME"

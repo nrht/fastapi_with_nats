@@ -5,9 +5,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
-path = os.path.join(os.path.dirname(__file__), '..', 'config', 'config.ini')
-config_ini = configparser.ConfigParser()
-config_ini.read(path)
+# path = os.path.join(os.path.dirname(__file__), '..', 'config', 'config.ini')
+# config_ini = configparser.ConfigParser()
+# config_ini.read(path)
 # POSTGRES_SERVER = config_ini['POSTGRES']['POSTGRES_SERVER']
 # POSTGRES_DB = config_ini['POSTGRES']['POSTGRES_DB']
 # POSTGRES_SERVER = os.getenv('POSTGRES_SERVER')

@@ -28,13 +28,6 @@ spec:
       containers:
       - name: auth-postgres
         image: postgres:12.1-alpine
-        env:
-        - name: POSTGRES_DATABASE
-          value: postgres
-        - name: POSTGRES_USER
-          value: postgres
-        - name: POSTGRES_PASSWORD
-          value: postgres
         volumeMounts:
         - name: init-sql-configmap
           mountPath: /docker-entrypoint-initdb.d
@@ -51,7 +44,7 @@ spec:
   selector:
     app: auth-postgres
   ports:
-    - name: auth-postgres
+    - name: db
       protocol: TCP
       port: 5432
       targetPort: 5432

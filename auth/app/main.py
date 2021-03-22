@@ -15,8 +15,6 @@ app.include_router(authentication.router)
 app.include_router(role.router)
 app.include_router(user.router)
 
-
-
 @app.get("/")
 def read_root(request: Request):
     return {"message": "Hello World", "root_path": request.scope.get("root_path")}

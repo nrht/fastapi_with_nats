@@ -17,7 +17,10 @@ spec:
           image: nrht/fastapi-auth
           env:
           - name: POSTGRES_URI
-            value: 'postgresql://postgres:postgres@/postgres?host=auth-postgres-srv&port=5432'
+            value: 'postgres://postgres:postgres@auth-postgres-srv:5432/postgres'
+            # value: 'postgresql://postgres:postgres@/postgres?host=auth-postgres-srv&port=5432'
+          - name: ROOT_PATH
+            value: '/api'
           - name: JWT_KEY
             valueFrom:
               secretKeyRef:

@@ -22,10 +22,10 @@ spec:
             backend:
               serviceName: auth-srv
               servicePort: 8000
-          # - path: /(/|$)(.*)
-          #   backend:
-          #     serviceName: auth-srv
-          #     servicePort: 8000
+          - path: /api(/|$)(.*)
+            backend:
+              serviceName: auth-srv
+              servicePort: 8000
           # - path: /api/tickets/?(.*)
           #   backend:
           #     serviceName: tickets-srv

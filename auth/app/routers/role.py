@@ -9,7 +9,7 @@ from repository import role
 
 router = APIRouter(
     tags=['role'],
-    prefix='/api/role'
+    prefix='/role'
 
 )
 get_db = database.get_db

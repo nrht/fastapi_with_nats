@@ -7,7 +7,7 @@ from auth_module import hashing, token_2
 
 router = APIRouter(
     tags=['authentication'],
-    prefix='/api/login'
+    prefix='/login'
 )
 get_db = database.get_db
 
