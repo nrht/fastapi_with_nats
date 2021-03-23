@@ -17,6 +17,8 @@ from sqlalchemy.orm import sessionmaker
 SQLALCHAMY_DATABASE_URL = os.getenv('POSTGRES_URI')
 # SQLALCHAMY_DATABASE_URL = f'postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@/{POSTGRES_DB}?host={POSTGRES_SERVER}&port={POSTGRES_PORT}'
 
+
+
 engine = create_engine(SQLALCHAMY_DATABASE_URL, echo=True)
 Base = declarative_base()
 
