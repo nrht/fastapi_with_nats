@@ -14,12 +14,14 @@ class UserCreate(UserBase):
     class Config:
         orm_mode = True
 
+
 class User(UserBase):
     id: int
     registered_at: datetime
     role_id: int
     class Config:
         orm_mode = True
+
 
 class RoleBase(BaseModel):
     role: str
@@ -32,6 +34,12 @@ class Role(RoleBase):
     users: List[User] = []
     class Config():
         orm_mode = True
+
+
+class UserWithRole(BaseModel):
+    user: User
+    role: RoleBase
+
 
 class Login(BaseModel):
     username: str

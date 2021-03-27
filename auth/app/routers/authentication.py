@@ -22,6 +22,11 @@ def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(
     if not hashing.Hash.verify(user.password, request.password):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f'Incorrect password')
+    
+    # data = {
+    #     "user": user.email,
+    #     "role": user.role
+    # }
 
     access_token = token_2.create_access_token(data={"sub": user.email})
     return {'access_token': access_token, 'token_type': 'bearer'}

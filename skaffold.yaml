@@ -16,11 +16,13 @@ build:
         manual:
           - src: 'app/**/*.py'
             dest: .
-    # - image: nrht/client
-    #   context: client
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - src: '**/*.js'
-    #         dest: .
+    - image: nrht/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.ts'
+            dest: .
+          - src: '**/*.tsx'
+            dest: .
