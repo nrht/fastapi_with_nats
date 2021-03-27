@@ -27,6 +27,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
+import Grid, { GridSpacing } from '@material-ui/core/Grid';
 import theme from '../src/theme';
 
 const drawerWidth = 240;
@@ -108,6 +109,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [spacing, setSpacing] = React.useState<GridSpacing>(2);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -149,9 +151,18 @@ const App = ({ Component, pageProps }: AppProps) => {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" noWrap>
+              <Grid container className={classes.root} spacing={2}>
+                <Grid item xs={12}>
+                  <Grid container justify="center" spacing={spacing}>
+                    <Typography variant="h6" noWrap>
+                      Mini variant drawer
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </Grid>
+              {/* <Typography variant="h6" noWrap>
                 Mini variant drawer
-              </Typography>
+              </Typography> */}
             </Toolbar>
           </AppBar>
           <Drawer
