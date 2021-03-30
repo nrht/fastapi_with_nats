@@ -8,3 +8,4 @@ python-jose == 3.2.0
 python-multipart == 0.0.5
 mypy == 0.812
 cryptography == 3.3.2
+pandas == 1.2.3

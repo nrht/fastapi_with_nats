@@ -153,16 +153,21 @@ const App = ({ Component, pageProps }: AppProps) => {
               </IconButton>
               <Grid container className={classes.root} spacing={2}>
                 <Grid item xs={12}>
-                  <Grid container justify="center" spacing={spacing}>
-                    <Typography variant="h6" noWrap>
-                      Mini variant drawer
-                    </Typography>
+                  <Grid container justify="space-between" spacing={spacing}>
+                    <Grid container item xs={8} spacing={spacing}>
+                      <Typography variant="h6" noWrap>
+                        Mini variant drawer
+                      </Typography>
+                    </Grid>
+
+                    <Grid container item xs={4} spacing={spacing}>
+                      <Typography variant="h6" noWrap>
+                        Login
+                      </Typography>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-              {/* <Typography variant="h6" noWrap>
-                Mini variant drawer
-              </Typography> */}
             </Toolbar>
           </AppBar>
           <Drawer
